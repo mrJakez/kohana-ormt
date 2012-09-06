@@ -92,7 +92,7 @@ Understanding each of these settings is important.
 ```
 
 
-## Using / Examples
+## Using / a specific example
 
 
 ### Example introduction
