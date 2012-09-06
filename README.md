@@ -1,7 +1,27 @@
 kohana-multilanguage
 ====================
 
-With the help of Multilanguage the different attributes wouldn't stored directly in the Model-specific table. They are stored inside a flat translations-table. Thus it is very easy to add additional languages Without changing each model and modify the database. 
+With the help of Multilanguage the translated attributes of a ORM Model wouldn't stored directly in the Model-specific table. 
+This as *translated field*  declared attributes are stored inside a flat translations-table. Thus it is very easy to add additional languages Without changing each model and modify the database. 
+
+# What we want to avoid
+	
+```sql
+	CREATE TABLE `articles` (
+	  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	  `crdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	  `enabled` varchar(1) NOT NULL DEFAULT '0',
+	  `title_de` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `title_en` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `title_es` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `title_nl` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `text_de` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `text_en` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `text_es` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  `text_nl` varchar(250) CHARACTER SET utf8 NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+```
 
 ## Installation and Configuration
 
@@ -98,25 +118,6 @@ Hereby the `author` is a relation to an user model, the `crdate` is a DATE, the 
 ```
 
 As you can see there are no `title` and `text` fields directly attached to the articles database structure. This is because the translated values will be stored inside the translations table. This is more elegant than something like this:
-
-### What we want to avoid
-	
-```sql
-	CREATE TABLE `articles` (
-	  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-	  `crdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	  `enabled` varchar(1) NOT NULL DEFAULT '0',
-	  `title_de` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `title_en` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `title_es` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `title_nl` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `text_de` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `text_en` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `text_es` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  `text_nl` varchar(250) CHARACTER SET utf8 NOT NULL,
-	  PRIMARY KEY (`id`)
-	) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-```
 
 ### The Article model definition
 
