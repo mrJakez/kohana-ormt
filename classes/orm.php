@@ -25,7 +25,12 @@ class ORM extends Kohana_ORM
 	public function __construct($id = NULL)
 	{
 		parent::__construct($id);
-		
+
+		if (!property_exists($this, '_translated_fields')) 
+		{
+			return;
+		}
+
 		$this->_seperator = Kohana::$config->load('multilanguage')->torm_seperator;
 		$this->_lang = Kohana::$config->load('multilanguage')->language_key_mapping;
 		
@@ -47,6 +52,11 @@ class ORM extends Kohana_ORM
 	 */
 	public function __get($column)
 	{
+		if (!property_exists($this, '_translated_fields')) 
+		{
+			return parent::__get($column);
+		}
+		
 		$lang = $this->get_language($column);
 		$field = $this->get_field($column);
 		
@@ -84,6 +94,11 @@ class ORM extends Kohana_ORM
 	 */
 	public function create(Validation $validation = NULL)
 	{
+		if (!property_exists($this, '_translated_fields')) 
+		{
+			return parent::create($validation);	
+		}
+		
 		$translated_object = array();
 		
 		foreach ($this->_translated_fields as $tfield)
@@ -124,7 +139,11 @@ class ORM extends Kohana_ORM
 	 */
 	public function update(Validation $validation = NULL)
 	{
-			
+		if (!property_exists($this, '_translated_fields')) 
+		{
+			return parent::update($validation);
+		}
+		
 		foreach ($this->_translated_fields as $tfield)
 		{
 			foreach ($this->_lang as $lang)
