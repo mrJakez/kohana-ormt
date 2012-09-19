@@ -24,7 +24,7 @@ class Kohana_Multilanguage
 	//returns the current language
 	public static function current()
 	{
-		$urllang = Request::current()->param('language');
+		$urllang = Request::initial()->param('language');				
 		return Kohana::$config->load('multilanguage')->language_key_mapping[$urllang];
 	}
 	
