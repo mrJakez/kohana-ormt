@@ -28,6 +28,11 @@ class Kohana_Multilanguage
 		return Kohana::$config->load('multilanguage')->language_key_mapping[$urllang];
 	}
 	
+	public static function current_key()
+	{
+		return self::get_urlkey(self::current());
+	}
+	
 	
 	public static function get_urlkey($lang)
 	{
