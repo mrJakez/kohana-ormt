@@ -6,7 +6,7 @@ class Kohana_ORMT
 	{
 		$keys = array();
 
-		foreach (Kohana::$config->load('ormtranslations')->language_key_mapping as $urlkey => $lang)
+		foreach (Kohana::$config->load('ORMT')->language_key_mapping as $urlkey => $lang)
 		{
 			$keys[] = $urlkey;
 		}
@@ -17,7 +17,7 @@ class Kohana_ORMT
 	
 	public static function default_language()
 	{		
-		return ORMT::get_urlkey(Kohana::$config->load('ormtranslations')->default_language);
+		return ORMT::get_urlkey(Kohana::$config->load('ORMT')->default_language);
 	}
 	
 	
@@ -25,7 +25,7 @@ class Kohana_ORMT
 	public static function current()
 	{
 		$urllang = Request::initial()->param('language');				
-		return Kohana::$config->load('ormtranslations')->language_key_mapping[$urllang];
+		return Kohana::$config->load('ORMT')->language_key_mapping[$urllang];
 	}
 	
 	public static function current_key()
@@ -36,6 +36,6 @@ class Kohana_ORMT
 	
 	public static function get_urlkey($lang)
 	{
-		return array_search($lang, Kohana::$config->load('ormtranslations')->language_key_mapping);
+		return array_search($lang, Kohana::$config->load('ORMT')->language_key_mapping);
 	}
 }

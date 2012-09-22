@@ -9,7 +9,9 @@ return array(
 	
 	// enabled languages and the urlkey. URLKEY => ISO 639-1 Language Codes
 	'language_key_mapping' => array(
+	/*
 		'deutsch' => 'de',
 		'englisch' => 'en' 
+	*/
 	),
 );

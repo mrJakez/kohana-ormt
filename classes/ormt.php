@@ -1,3 +1,3 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class ORMTranslations extends Kohana_ORMTranslations {}
+class ORMT extends Kohana_ORMT {}
