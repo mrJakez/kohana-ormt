@@ -5,13 +5,13 @@ return array(
 	'modules' => array(
 
 		// This should be the path to this modules userguide pages, without the 'guide/'. Ex: '/guide/modulename/' would be 'modulename'
-		'multilanguage' => array(
+		'ormt' => array(
 
 			// Whether this modules userguide pages should be shown
 			'enabled' => TRUE,
 			
 			// The name that should show up on the userguide index page
-			'name' => 'Multilanguage',
+			'name' => 'ORMTranslations',
 
 			// A short description of this module, shown on the index page
 			'description' => 'ORM Multilanguage support',
