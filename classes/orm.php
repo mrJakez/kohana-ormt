@@ -31,8 +31,8 @@ class ORM extends Kohana_ORM
 			return;
 		}
 
-		$this->_seperator = Kohana::$config->load('ORMT')->torm_seperator;
-		$this->_lang = Kohana::$config->load('ORMT')->language_key_mapping;
+		$this->_seperator = Kohana::$config->load('ormt')->torm_seperator;
+		$this->_lang = Kohana::$config->load('ormt')->language_key_mapping;
 		
 		foreach ($this->_translated_fields as $tfield)
 		{
