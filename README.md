@@ -1,8 +1,7 @@
 kohana-multilanguage
 ====================
 
-With the help of Multilanguage the translated attributes of a ORM Model wouldn't stored directly in the Model-specific table. 
-This as *translated field*  declared attributes are stored inside a flat translations-table. Thus it is very easy to add additional languages Without changing each model and modify the database. 
+With the help of Multilanguage specific attributes of an ORM model can be marked as "available in different languages". These attributes are not stored directly in the specific model table, instead these as *translated field*  declared attributes are stored inside a flat translations-table. This hat the advantage that it is from now on very easy to add additional languages without changing each model implementation and to add migration scripts for the database. 
 
 # What we want to avoid
 	
@@ -38,7 +37,7 @@ Before we use Multilanguage, we must enable the modules required
   ?>
 ```
 
-The ORM module is requried for the Multilanguage module to work. Because of the Cascading Filesystem the Multilanguage module must be loaded before the ORM module
+The ORM module is required for the Multilanguage module to work. Based on the cascading filesystem the Multilanguage module must be loaded before the ORM module.
 ### create translation table
 ```sql
 	CREATE TABLE `translations` (
@@ -71,18 +70,18 @@ The ORM module is requried for the Multilanguage module to work. Because of the 
 ```
 #### Configuration values
 
-Understanding each of these settings is important.
+Here you can find detailed information for each configuration property:
 
 
 **default_language**
-> If no language key is found in the URI, the route will use this default parameter. The value must be a ISO 639-1 language code
+> If no language key is found in the URI, the route will use this as default parameter. The value must be a ISO 639-1 language code
 
 
 **torm_seperator**
-> This seperator will bei used fork the ORM language attributes. Thus a attribute can be accessed by $model->name, whereby name has the format: attribute.torm_seperator.languagecode
+> This seperator will be used divide the ORM language attributes. Thus an attribute can be accessed by $model->name, whereby $name has to be provided in the format: attribute.torm_seperator.languagecode
 
 **language_key_mapping**
-> : Here you can enable the different languages and define their url-key. The array key is the url parameter, and the array value is the enabled language. If you don't want to use the url-key feature, simple define it like this:
+> With this property you can enable the different languages and define their url-key. The array key acts as the url parameter, and the array value as enabled language. If you don't want to use the possibility to define specific url keys, simple define it like this:
 ```php
 	'language_key_mapping' => array(
 		'de' => 'de',
@@ -97,7 +96,7 @@ Understanding each of these settings is important.
 
 ### Example introduction
 
-When you configured the Multilanguage module you can directly start to extend your ORM models. For example we use a simple Article model represented through ORM. The article persists the following data:
+When you have configured the Multilanguage module you can directly start to extend the already existing ORM models. In this example chapter we are using a simple Article model represented by ORM. The article object has to persist the following data:
 
 * `author`
 * `crdate`
@@ -105,7 +104,7 @@ When you configured the Multilanguage module you can directly start to extend yo
 * `title`
 * `text` 
 
-Hereby the `author` is a relation to an user model, the `crdate` is a DATE, the `visible` field is a bool flag, and `title` and `text` are fields with a different content for each language. Now the Article database structure looks like the following:
+Hereby the `author` is a relation to an user model, the `crdate` is a DATE, the `visible` field is a bool flag. `title` and `text` are fields with a language specific content. The Article database structure will look like this:
 
 ### Article database structure
 ```sql
@@ -117,9 +116,9 @@ Hereby the `author` is a relation to an user model, the `crdate` is a DATE, the 
 	) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 ```
 
-As you can see there are no `title` and `text` fields directly attached to the articles database structure. This is because the translated values will be stored inside the translations table. This is more elegant than something like this:
+As you can see there are no `title` and `text` fields directly attached to the articles database structure. The translated values will be stored inside the generic translations table.
 
-### The Article model definition
+### The Article model class definition
 
 To declare the `title` and `text` fields, the `$_translated_fields` array must be defined inside the Article model like the following: 
 
@@ -148,16 +147,16 @@ To declare the `title` and `text` fields, the `$_translated_fields` array must b
 
 Now you can simple access each value: 
 ```php
-	//setter
+	// setter
 	$article->enabled = TRUE:
 	$article->title_de = 'Musik 2012';
 	$article->title_en = 'Music 2012';
 	$article->save();
 	
-	//getter
+	// getter
 	echo $article->title_de;
 	
-	//current language feature:
+	// current language feature:
 	echo $article->title;
 ```
 	
